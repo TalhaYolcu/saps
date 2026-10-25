@@ -1,0 +1,10 @@
+torch>=2.0
+numpy
+simpy
+faiss-cpu
+matplotlib
+seaborn
+scipy
+pyyaml
+tqdm
+pytest

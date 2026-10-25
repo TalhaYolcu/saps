@@ -1,0 +1,95 @@
+# =============================================================================
+# SAPS — Simulation Configuration
+# Semantic-Driven Agentic Protocol Stack for Mobile AI Agents
+# =============================================================================
+
+simulation:
+  seed: 42
+  duration_ms: 10000          # Total simulation time in milliseconds
+  num_agents: 4               # Number of AI agents in the simulation
+  verbose: true               # Enable detailed logging
+
+# -----------------------------------------------------------------------------
+# Wireless Channel Model
+# -----------------------------------------------------------------------------
+channel:
+  model: rayleigh              # Channel fading model: rayleigh | rician
+  snr_range_db: [0, 5, 10, 15, 20, 25, 30]   # SNR sweep points (dB)
+  doppler_freq_hz: 50.0       # Maximum Doppler frequency (Hz)
+  rician_k_factor: 3.0        # Rician K-factor (used when model == rician)
+
+# -----------------------------------------------------------------------------
+# Layer 1 — Deep-JSCC (Physical Layer)
+# -----------------------------------------------------------------------------
+physical_layer:
+  latent_dim: 64               # Dimension of the latent representation
+  iq_symbols: 32               # Number of I/Q symbols per transmission
+  encoder_hidden: 128          # Hidden units in the neural encoder
+  decoder_hidden: 128          # Hidden units in the neural decoder
+  training_epochs: 50          # Epochs for training the JSCC autoencoder
+  learning_rate: 0.001         # Adam optimizer learning rate
+
+# -----------------------------------------------------------------------------
+# Layer 4 — IA-STP (Intent-Aware Semantic Transport Protocol)
+# -----------------------------------------------------------------------------
+transport_layer:
+  entropy_threshold: 0.3       # Token entropy threshold for selective retransmission
+  max_retransmissions: 3       # Maximum retransmission attempts per segment
+  selective_arq_enabled: true  # Enable entropy-gated selective ARQ
+  window_size: 8               # Sliding window size (segments)
+  timeout_ms: 100              # Retransmission timeout in milliseconds
+
+# -----------------------------------------------------------------------------
+# Layer 3 — V-CCR (Vector-space Context-aware Content Routing)
+# -----------------------------------------------------------------------------
+network_layer:
+  embedding_dim: 128           # Dimension of intent embedding vectors
+  faiss_index_type: Flat       # FAISS index type: Flat | IVF
+  num_nodes: 8                 # Number of routing nodes in the network
+  similarity_threshold: 0.75   # Cosine similarity threshold for route selection
+
+# -----------------------------------------------------------------------------
+# Layer 2 — SP-MAC (Semantic-Priority MAC)
+# -----------------------------------------------------------------------------
+datalink_layer:
+  num_priority_queues: 4       # Number of priority queues
+  criticality_levels:          # Criticality tiers (highest → lowest)
+    - critical
+    - high
+    - medium
+    - low
+
+# -----------------------------------------------------------------------------
+# Layer 5 — Application Layer
+# -----------------------------------------------------------------------------
+application_layer:
+  kv_cache_window: 512         # KV-cache sliding window size (tokens)
+  latent_vector_dim: 256       # Dimension of latent application vectors
+  compression_ratio: 0.25      # Target compression ratio for latent encoding
+
+# -----------------------------------------------------------------------------
+# Layer 6 — AIRL (AI-to-AI Resource & Liaison)
+# -----------------------------------------------------------------------------
+airl:
+  negotiation_timeout_ms: 200  # Timeout for inter-agent negotiation (ms)
+  context_sync_interval_ms: 500  # Interval for periodic context synchronisation (ms)
+  offloading_threshold: 0.8    # Load threshold triggering task offloading
+
+# -----------------------------------------------------------------------------
+# Traditional Baseline Configuration
+# -----------------------------------------------------------------------------
+baseline:
+  protocol: "HTTP/3+QUIC"      # Baseline protocol stack identifier
+  retransmit_all: true         # Retransmit all lost packets (no selective ARQ)
+
+# -----------------------------------------------------------------------------
+# Evaluation & Metrics
+# -----------------------------------------------------------------------------
+evaluation:
+  metrics:
+    - latency
+    - bleu
+    - bandwidth
+    - energy
+  num_trials: 10               # Independent trials per configuration
+  confidence_level: 0.95       # Confidence level for statistical intervals

@@ -381,3 +381,4 @@ py scripts/run_comparison.py
 ```
 
 It executes the complete 6-layer sweep in **under 2 seconds**, displays the live head-to-head metrics comparison table, and generates the slide dashboard figures.
+

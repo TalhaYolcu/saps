@@ -1,384 +1,268 @@
-# 🎤 SAPS: 30-Minute Term Project Presentation Guide & Slide Deck
+# 🎤 SAPS: 30-Dakikalık Dönem Projesi Sunum Rehberi & Genişletilmiş Slayt Notları
 
-**Course:** CSE 476/575 — Fall 2026 Term Project  
-**Instructor:** Prof. Dr. Hasari Çelebi  
-**Project Title:** Semantic-Driven Agentic Protocol Stack (SAPS) for Mobile AI Agents  
-**Presenter:** Term Project Group / Yakup Yolcu  
-**Presentation Target Time:** 25 Minutes Presentation + 5 Minutes Q&A (Total 30 Minutes)
+**Ders:** CSE 476/575 — Güz 2026 Dönem Projesi  
+**Ders Yürütücüsü:** Prof. Dr. Hasari Çelebi  
+**Proje Başlığı:** Semantic-Driven Agentic Protocol Stack (SAPS) for Mobile AI Agents  
+**Sunan:** Yakup Yolcu  
+**Sunum Formatı:** 16:9 Geniş Ekran PowerPoint (`docs/SAPS_Presentation.pptx`, 26 Slayt)  
+**Hedef Süre Dağılımı:** 25 Dakika Sunum + 5 Dakika Soru-Cevap & Canlı Gösterim (Toplam 30 Dakika)  
+**Tüm Slaytlarda Konuşmacı Notları:** PowerPoint Sunucu Görünümünde (Presenter View) mevcuttur.
 
 ---
 
-## ⏱️ Presentation Timing & Pacing Blueprint
+## ⏱️ Zaman Yönetimi & Bölüm Planı (26 Slayt)
 
-| Section | Slides | Target Duration | Cum. Time | Focus |
+| Bölüm | Slaytlar | Hedef Süre | Küm. Zaman | Odak & İçerik |
 |---|---|---|---|---|
-| **I. Motivation & Problem** | Slides 1–4 | 5 min | 05:00 | Why TCP/IP & HTTP fail AI agents; the Agentic Internet |
-| **II. SAPS 6-Layer Architecture** | Slides 5–12 | 11 min | 16:00 | Detailed walk-through of each redesigned layer |
-| **III. Testbed & Methodology** | Slides 13–14 | 3 min | 19:00 | SimPy discrete-event testbed + Rayleigh/Rician channels |
-| **IV. Experimental Results** | Slides 15–18 | 6 min | 25:00 | Latency (6.7x), BLEU fidelity, bandwidth savings (95%) |
-| **V. Roadmap & Conclusion** | Slides 19–21 | 2 min | 27:00 | Remaining steps to Dec 25 report + Q&A |
-| **VI. Open Q&A** | — | 3–5 min | 30:00 | Anticipated technical questions from instructor |
+| **I. Giriş, Motivasyon & Teorik Temeller** | Slayt 1–4 | 5 dk | 05:00 | İnsan web'inden ajan internetine geçiş; Shannon & Weaver 3 iletişim seviyesi; 4 darboğaz |
+| **II. SAPS 6 Katmanlı Mimari Tasarımı** | Slayt 5–14 | 13 dk | 18:00 | Katman 6 (AIRL), Katman 5 (KV streaming), Katman 4 (IA-STP), Katman 3 (V-CCR), Katman 2 (SP-MAC), Katman 1 (Deep-JSCC) |
+| **III. NVIDIA Sionna & Testbed Altyapısı** | Slayt 15–16 | 2 dk | 20:00 | NVIDIA Sionna 2.2 3GPP TR 38.901 entegrasyonu ve SimPy ayrık olay simülatörü |
+| **IV. Deneysel Sonuçlar & Karşılaştırmalı Analiz** | Slayt 17–22 | 6 dk | 26:00 | Gecikme (6.76x), Kuyruk gecikmesi (22x), BLEU kademeli bozulma, Bant genişliği (%95), Sionna 3GPP |
+| **V. Canlı Simülasyon, Web Paneli & Video** | Slayt 23–24 | 2 dk | 28:00 | İnteraktif Web UI (`run_simulation_ui.py`) ve gömülü simülasyon videosu |
+| **VI. Karşılaştırma Özeti & Soru-Cevap Savunması** | Slayt 25–26 | 2–5 dk | 30:00+ | Sayısal karşılaştırma tablosu, sonuçlar ve Prof. Dr. Hasari Çelebi'nin soruları |
 
 ---
 
-## 📽️ Slide-by-Slide Deck & Speaker Notes
+## 📽️ Slayt-Slayt Detaylı İçerik ve Konuşmacı Notları
 
 ---
 
-### Slide 1: Title Slide
-* **Visual:** Clean academic header with university logo, course code, and project title.
-* **Content:**
-  * **Title:** Semantic-Driven Agentic Protocol Stack (SAPS) for Mobile AI Agents
-  * **Course:** CSE 476/575 Mobile Communications & AI/ML
-  * **Instructor:** Prof. Dr. Hasari Çelebi
-  * **Authors:** [Your Name / Team]
-* **Speaker Script (0:00 - 0:45):**
-  > *"Good afternoon, Professor Çelebi and colleagues. Today, I am excited to present our term project: the **Semantic-Driven Agentic Protocol Stack (SAPS)**. As wireless communications advance toward 6G and autonomous AI agents become the primary actors on the internet, the foundational assumptions of network protocol design must be fundamentally rethought. Today, we demonstrate a complete 6-layer protocol stack redesigned specifically for machine-to-machine, semantic-level communication over mobile wireless channels."*
+### Slayt 1: Başlık Slaytı (Title Slide)
+* **Başlık:** Semantic-Driven Agentic Protocol Stack (SAPS) for Mobile AI Agents
+* **Alt Başlık:** Redesigning the 6-Layer Internet Protocol Stack for Autonomous M2M Reasoning
+* **Ders Bilgisi:** CSE 476/575 Mobile Communications & AI/ML | Prof. Dr. Hasari Çelebi | Yakup Yolcu
+* **Konuşmacı Notu [00:00 - 01:00]:**
+  > *"Sayın Prof. Dr. Hasari Çelebi Hocam ve değerli çalışma arkadaşlarım, hepiniz hoş geldiniz. Bugün sizlere CSE 476/575 dersi kapsamında geliştirdiğimiz dönem projemizi sunmaktan büyük memnuniyet duyuyorum: 'Semantic-Driven Agentic Protocol Stack', kısaca SAPS.*  
+  > *Bildiğiniz üzere 1970'lerde ve 80'lerde temelleri atılan mevcut TCP/IP ve HTTP protokol ailesi, insan kullanıcıların web sayfalarını gezmesi ve dosyaları bit-bit hatasız indirmesi amacıyla tasarlandı. Ancak 6G ve ötesi mobil ağlarda artık internetin birincil aktörleri insanlar değil; otonom İHA'lar, robotik filolar ve işbirlikçi yapay zeka ajanları olacak.*  
+  > *Bu çalışmada, klasik 5 katmanlı internet mimarisini yapay zeka ajanlarının anlamsal muhakeme ihtiyaçlarına göre baştan tasarladık ve üzerine yeni bir 'Ajan Niyet ve Muhakeme Katmanı' ekleyerek 6 katmanlı uçtan uca eksiksiz bir protokol yığını inşa ettik. Ayrıca simülasyonlarımızda standart fading modellerinin yanı sıra NVIDIA Sionna 3GPP TR 38.901 kanal modellerini de entegre ederek endüstri standardı 5G/6G ortamlarında doğruladık."*
 
 ---
 
-### Slide 2: The Paradigm Shift — From Human Internet to Agentic Internet
-* **Visual:** Split comparison graphic:
-  * *Left:* Human Consumer Internet (Streaming, HTML/JSON, bulk downloads, human latency tolerance ~200ms).
-  * *Right:* Agentic Internet (Autonomous agent-to-agent negotiation, KV-cache tensor transfers, sub-10ms inference handoffs, epistemic uncertainty).
-* **Key Points:**
-  * Current Internet was architected in the 1970s–1990s for human eyeballs and terminal sessions.
-  * Future Internet will be dominated by machine-to-machine (M2M) autonomous reasoning.
-  * Human-centric protocols prioritize bit-exact reliable byte streams; agentic protocols care about **meaning, reasoning density, and latency**.
-* **Speaker Script (0:45 - 2:00):**
-  > *"To understand why we need SAPS, let us examine the fundamental shift occurring right now. The current internet was built around human consumption patterns—viewing web pages, streaming video, and transferring opaque files. Protocols like HTTP/3, TCP, and IP treat every payload as a sequence of raw bytes, guaranteeing bit-level exactness at the cost of retransmission delays.*  
-  > *However, next-generation mobile networks will connect autonomous AI agents—such as autonomous drones, robotic swarms, and edge assistants. These agents communicate via token sequences, latent feature embeddings, and Key-Value attention states. For an AI agent, bit-level error is not always fatal; what matters is **semantic entropy and reasoning preservation**. Blindly treating semantic tokens like web pages creates massive inefficiencies."*
+### Slayt 2: Paradigma Dönüşümü: İnsan Web'inden Ajanik İnternet'e
+* **İçerik:** İnsan Tüketici Web'i (HTML/JSON, 200ms gecikme toleransı, katı bit doğruluğu) vs Ajanik İnternet (Tensör akışı, <10ms gecikme, anlamsal bilgi korunumu).
+* **Konuşmacı Notu [01:00 - 02:15]:**
+  > *"Hocam, bu slaytta günümüz interneti ile geleceğin ajan ağları arasındaki derin zıtlığı görüyoruz. Klasik internet altyapısı, insan algısına göre şekillenmiştir. İnsan gözü 100-200 milisaniyelik bir gecikmeyi fark etmez; ancak bir dosyayı indirirken tek bir bitin dahi bozulmaması esastır. Bu yüzden TCP, bir paket kaybolduğunda akışı durdurur ve o paketi yeniden iletir.*  
+  > *Fakat otonom bir İHA veya robotik sürüş sistemini düşünelim. Burada karar alma döngüsünün 10 milisaniyenin altında tamamlanması gerekir. Bir cümledeki 'the' veya 'bir' gibi dolgu sözcükleri kaybolsa bile, downstream dil modeli veya karar motoru cümlenin anlamını %99 başarıyla kavrayabilir. Ancak klasik TCP gibi o dolgu kelimesi için 100 milisaniye boyunca akışı durdurup yeniden iletim yaparsak (head-of-line blocking), drone engele çarpabilir. Dolayısıyla yapay zeka ajanları için önemli olan bit-seviyesinde aynılık değil, anlamsal bilginin (semantic meaning) en düşük gecikmeyle hedefe ulaşmasıdır."*
 
 ---
 
-### Slide 3: Bottlenecks of Traditional Protocols for Mobile Agents
-* **Visual:** Diagram highlighting 4 failure points of traditional protocols:
-  1. *Serialization Overhead:* JSON/Protobuf converts tensors to verbose text $\rightarrow$ high CPU & latency overhead.
-  2. *Blind ARQ Retransmissions:* TCP/QUIC retransmits a lost comma or stop-word with identical urgency as a critical safety command.
-  3. *Static IP Routing:* IP routes to a static interface address, regardless of whether that node has GPU VRAM available or suitable model weights.
-  4. *Cliff Effect in Physical Layer:* Traditional QAM modulation collapses abruptly when fading drops SNR below threshold.
-* **Speaker Script (2:00 - 3:30):**
-  > *"When we run modern AI agent workflows over the traditional stack, we run into four critical bottlenecks:*  
-  > *First, serialization. Sending KV caches or hidden states over REST or gRPC requires serializing high-dimensional float tensors into JSON or Protobuf. This adds up to 60% computational latency before a single bit hits the antenna.*  
-  > *Second, blind retransmission. If a packet containing a low-entropy token like 'the' or an attention padding token is dropped due to mobile channel fading, QUIC halts streaming and triggers an exponential-backoff retransmission storm.*  
-  > *Third, rigid addressing. IP routes by geographic or topological destination, completely unaware of edge compute load or VRAM readiness.*  
-  > *And fourth, in the physical layer, traditional modulation suffers from the cliff effect: once fading drops SNR below the decoding threshold, packets are completely lost."*
+### Slayt 3: Teorik Temeller: Weaver & Shannon'ın 3 İletişim Seviyesi
+* **İçerik:**
+  * **Seviye A (Teknik Seviye):** Klasik Shannon Problemi (1948). Bitlerin hatasız iletimi. 1G-5G telekomünikasyon odağı.
+  * **Seviye B (Anlamsal Seviye):** Sembollerin hedef anlamı ne kadar yansıttığı (Weaver 1949). Deep-JSCC ve semantik entropi.
+  * **Seviye C (Pragmatik / Etkililik Seviyesi):** Alınan anlamın alıcı ajanın eylemlerini hedefe yönlendirme başarısı. AIRL niyet müzakeresi.
+* **Konuşmacı Notu [02:15 - 03:45]:**
+  > *"Hocam, çalışmamızın teorik temeli iletişim teorisinin kurucuları Claude Shannon ve Warren Weaver'ın 1949'daki üç seviyeli iletişim modeline dayanıyor. Shannon bildiğiniz gibi Seviye A'yı, yani Teknik Seviyeyi tanımlamıştı: 'Gönderilen semboller fiziksel kanaldan ne kadar hatasız geçer?' 1G'den 5G'ye kadar hücresel ağlar ve TCP/IP ailesi tamamen bu Seviye A'yı optimize etti. İçeriğin bir video mu, bir koordinat mı olduğu umursanmaksızın bitler taşındı.*  
+  > *Ancak Weaver, Seviye B ve Seviye C'yi tanımlamıştı: Seviye B Semantik İletişimdir: İletilen sembol hedef anlamı doğru aktarıyor mu? Seviye C ise Etkililik / Pragmatik İletişimdir: İletilen bilgi, alıcının görevi başarıyla yerine getirmesini sağlıyor mu?*  
+  > *İşte SAPS, mobil iletişimi yalnızca Seviye A'ya sıkışıp kalmaktan kurtarıp, Seviye B (Semantik) ve Seviye C (Pragmatik) seviyelerine yükseltmektedir."*
 
 ---
 
-### Slide 4: Research Objectives & Scope
-* **Visual:** Table of course requirement layers mapped to SAPS innovations:
-  | Internet Layer | Traditional Baseline | SAPS Innovation |
-  |---|---|---|
-  | **(f) NEW Layer** | None | **AIRL** (Agent Intent & Reasoning Layer) |
-  | **(a) Application** | HTTP/3 / JSON / REST | **Direct KV-Cache & Latent Streaming** |
-  | **(b) Transport** | TCP / QUIC (Full ARQ) | **IA-STP** (Selective ARQ by Token Entropy) |
-  | **(c) Network** | IP / BGP (Static Routing) | **V-CCR** (Vector-space Content Routing) |
-  | **(d) Data Link** | CSMA / Best-effort MAC | **SP-MAC** (Criticality-Aware Priority Queuing) |
-  | **(e) Physical** | Digital QAM / OFDM | **Deep-JSCC** (Neural Joint Source-Channel Codec) |
-* **Speaker Script (3:30 - 5:00):**
-  > *"In direct accordance with the CSE 476/575 course guidelines set by Prof. Çelebi, our objective is to redesign each layer of the internet protocol stack according to AI agents, including introducing a brand-new layer.*  
-  > *Our deliverables include a fully working discrete-event network simulator, mathematical modeling of semantic entropy, neural physical transceivers, and quantitative comparative benchmarks against an HTTP/3 and QUIC baseline under identical mobile fading conditions."*
+### Slayt 4: Geleneksel Protokollerin Yapay Zeka Ajanlarındaki 4 Büyük Darboğazı
+* **İçerik:** 1. Serileştirme & JSON Darboğazı, 2. Kör ARQ & Yeniden İletim Fırtınaları, 3. Statik IP Katılığı, 4. Fiziksel Katmandaki Uçurum Etkisi (Cliff Effect).
+* **Konuşmacı Notu [03:45 - 05:00]:**
+  > *"Mevcut internet mimarisini mobil yapay zeka ajanlarında çalıştırdığımızda karşımıza çıkan 4 büyük teknik darboğaz şunlardır: 1. Serileştirme Yükü: Tensörleri JSON veya Protobuf'a çevirmek muazzam bir CPU yükü ve gecikme üretir. 2. Kör Yeniden İletim (Blind ARQ): TCP bir virgül veya dolgu kelimesi kaybolduğunda dahi tüm hattı bekletir. 3. Statik IP Katılığı: Bir ajan '192.168.1.50' IP'sine bağlanmak istemez; '80 GB VRAM'i ve Llama-3 modeli yüklü olan en yakın uç sunucuya' bağlanmak ister. 4. Uçurum Etkisi: 16-QAM veya 64-QAM gibi dijital modülasyonlarda kanal SNR'ı eşiğin altına indiği an paketler aniden sıfırlanır. SAPS, bu 4 darboğazın her birini kendi katmanlarında kökten çözmektedir."*
 
 ---
 
-### Slide 5: SAPS Architecture Overview
-* **Visual:** Comprehensive 6-layer protocol stack block diagram:
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Layer 6 (NEW) — AIRL: Agent Intent & Reasoning Layer       │
-├─────────────────────────────────────────────────────────────┤
-│  Layer 5 — Application: Direct KV-Cache & Latent Streaming │
-├─────────────────────────────────────────────────────────────┤
-│  Layer 4 — Transport: IA-STP (Entropy-Gated Selective ARQ)  │
-├─────────────────────────────────────────────────────────────┤
-│  Layer 3 — Network: V-CCR (Vector-space Intent Routing)     │
-├─────────────────────────────────────────────────────────────┤
-│  Layer 2 — Data Link: SP-MAC (Semantic-Priority Queuing)   │
-├─────────────────────────────────────────────────────────────┤
-│  Layer 1 — Physical: Deep-JSCC (Neural Latent-to-IQ Codec)  │
-└─────────────────────────────────────────────────────────────┘
-                               ▲
-                               ▼
-        Mobile Wireless Channel (Rayleigh / Rician Fading)
-```
-* **Speaker Script (5:00 - 6:30):**
-  > *"Here is the complete architectural overview of SAPS. The stack is arranged in six layers, operating as an end-to-end semantic pipeline:*  
-  > *At the very top sits AIRL, an entirely new layer that negotiates task contracts between agents and monitors compute resources.*  
-  > *Below it, the Application layer streams compressed KV-cache tensors.*  
-  > *The Transport layer, IA-STP, decides which packets deserve retransmission using Shannon entropy.*  
-  > *The Network layer, V-CCR, routes packets to edge nodes using cosine similarity in embedding space.*  
-  > *The Data Link layer, SP-MAC, schedules transmission frames based on semantic criticality tags.*  
-  > *And finally, the Physical layer employs Deep-JSCC, a neural transceiver mapping latent features directly to complex IQ symbols. Let us now examine each layer in detail."*
+### Slayt 5: SAPS Sistem Mimarisi: 6 Katmanın Uçtan Uca Yeniden Tasarımı
+* **İçerik:** Katman 6 (AIRL), Katman 5 (KV-Cache Streaming), Katman 4 (IA-STP), Katman 3 (V-CCR), Katman 2 (SP-MAC), Katman 1 (Deep-JSCC).
+* **Konuşmacı Notu [05:00 - 06:30]:**
+  > *"Sayın Hocam, dersimizin proje yönergesinde belirtilen tüm katman gereksinimlerini harfiyen karşılayacak şekilde 6 katmanlı bir mimari inşa ettik: En üstte yeni eklediğimiz Katman 6 yer alıyor: AIRL (Agent Intent & Reasoning Layer). Katman 5 Uygulama Katmanımızda JSON'u tamamen terk ettik; doğrudan 8-bit kuantize KV-cache akışı yapıyoruz. Katman 4 Nakil Katmanımız IA-STP, Shannon entropisine bakarak hangi paketin yeniden iletileceğini seçer. Katman 3 Ağ Katmanımız V-CCR, IP adresi yerine semantik kabiliyet vektörleri üzerinden yönlendirme yapar. Katman 2 Veri Bağı Katmanımız SP-MAC, 4 seviyeli donanımsal öncelik kuyruğuna sahiptir. Katman 1 Fiziksel Katmanımız Deep-JSCC ise tensörleri doğrudan sürekli IQ sembollerine eşleyen derin sinir ağı tabanlı bir alıcı-vericidir."*
 
 ---
 
-### Slide 6: Layer 6 (NEW) — Agent Intent & Reasoning Layer (AIRL)
-* **Visual:** Sequence diagram of inter-agent negotiation:
-```
-Mobile Agent                         Edge Node (Vision/LLM)
-     │                                         │
-     │── 1. Evaluate Offload (Load > 0.75) ───▶│
-     │── 2. Task Intent Vector (Dim=128) ─────▶│
-     │◀── 3. Contract Accepted (VRAM Available)│
-     │── 4. Shared Context Sync (Alpha=0.5) ──▶│
-```
-* **Core Functions:**
-  1. **Dynamic Task Offloading:** Triggers offloading when mobile compute load exceeds 75% or battery drops below 20%.
-  2. **Multi-Agent Negotiation:** Evaluates edge agent capability vectors against task requirements.
-  3. **Context State Alignment:** Maintains synchronization of shared agent context vectors using exponential moving alignment:
-     $$\mathbf{c}_{\text{sync}} = (1 - \alpha)\mathbf{c}_{\text{local}} + \alpha \mathbf{c}_{\text{remote}}$$
-* **Speaker Script (6:30 - 8:00):**
-  > *"Layer 6 is our NEW layer: the Agent Intent & Reasoning Layer, or AIRL. Traditional stacks have no concept of compute readiness or cognitive context.*  
-  > *AIRL continuously tracks the mobile agent's local compute load and battery state. When a complex visual reasoning task arrives and the mobile agent is constrained, AIRL generates a task intent embedding. It queries the local edge mesh, matches candidates based on capability profiles and available VRAM, and negotiates a binding task contract.*  
-  > *Furthermore, AIRL aligns shared conversational state vectors using an exponential alignment function, ensuring both agents share identical context without resending complete prompt histories."*
+### Slayt 6: Katman 6 (YENİ) — Ajan Niyet & Muhakeme Katmanı (AIRL)
+* **İçerik:** Dinamik Offload Kararı ($Load \ge 0.75$, $Battery \le 0.20$), Anlamsal Yetenek Eşleme, Otonom Görev Sözleşmesi, Ortak Bağlam Uyumu.
+* **Konuşmacı Notu [06:30 - 08:00]:**
+  > *"Katman 6, SAPS mimarisinin en özgün yeniliğidir. Klasik OSI veya TCP/IP modelinde böyle bir katman bulunmamaktadır. AIRL, doğrudan yapay zeka ajanlarının çalışma prensiplerine odaklanır. Bir mobil ajan (örneğin kamerasıyla çevre taraması yapan bir drone), işlemci yükü %75'in üzerine çıktığında veya bataryası kritik seviyeye indiğinde görevi yerel olarak sürdüremez. AIRL bu noktada devreye girer: Önce ağa bir niyet anonsu yapar, uç sunuculardan teklif toplar, 1.2 milisaniyede en uygun GPU'lu sunucuyla bağlayıcı bir sözleşme imzalar ve ortak bağlam vektörlerini senkronize eder. Böylece iletişim başlamadan önce 'kimin, hangi niyetle ne yapacağı' kesinleşmiş olur."*
 
 ---
 
-### Slide 7: Layer 5 (Application) — KV-Cache & Latent Vector Streaming
-* **Visual:** Data flow chart showing KV cache tensor compression:
-  * Raw Attention Tensors $(B, H, S, D) \rightarrow$ SVD / Rank Truncation $\rightarrow$ 8-bit Dynamic Quantization $\rightarrow$ Stream Chunks.
-  * Comparison bar: JSON overhead (450 KB) vs. SAPS Tensor Stream (22 KB) $\rightarrow$ **95% size reduction**.
-* **Key Innovation:**
-  * Replaces human-readable JSON/REST stringification with native tensor streaming.
-  * Dynamic integer quantization preserving attention key-value matrix rank.
-* **Speaker Script (8:00 - 9:30):**
-  > *"Moving to the Application layer: In LLM and multi-modal agent workflows, passing conversational context or intermediate layer activations requires moving transformer Key-Value caches.*  
-  > *In a traditional stack, an application must serialize these floats into JSON arrays or Protobuf messages, multiplying the byte payload by several times.*  
-  > *Our Application Layer implements direct tensor serialization: we apply dimensionality projection and 8-bit dynamic quantization. The receiver instantly dequantizes and reconstructs the attention keys and values. In our benchmarks, this achieves over 95% bandwidth reduction compared to standard JSON REST APIs."*
+### Slayt 7: Katman 6 Derinlemesine: Çoklu Ajan Müzakere Durum Makinesi
+* **İçerik:** FSM Adımları: IDLE $\rightarrow$ DISCOVERY $\rightarrow$ PROPOSAL & SCORING $\rightarrow$ BINDING $\rightarrow$ CONTEXT_SYNC. Çok kriterli skorlama formülü: $S = 0.50 \cdot \text{Sim}(e_t, e_c) + 0.30 \cdot (1 - L) + 0.20 \cdot (\text{VRAM}_{\text{avail}} / \text{VRAM}_{\text{req}})$.
+* **Konuşmacı Notu [08:00 - 09:15]:**
+  > *"Hocam, AIRL katmanımız arka planda kesin bir Sonlu Durum Makinesi (FSM) ile yönetilir. Ajan normal şartlarda IDLE durumundadır; yerel kaynaklar yetiyorsa boş yere telsiz yayını yapıp batarya harcamaz. Yük eşiği aşıldığında DISCOVERY fazına geçer. Ekranda gördüğünüz formülle üç farklı bileşeni ağırlıklandırıyoruz: Semantik kabiliyet benzerliği (%50), uç düğümün mevcut boş işlem kapasitesi (%30) ve VRAM yeterlilik oranı (%20). Bu sayede sadece en yakın olan düğüm değil, o an görevi en yüksek hız ve hassasiyetle bitirebilecek düğüm seçilmektedir."*
 
 ---
 
-### Slide 8: Layer 4 (Transport) — IA-STP (Intent-Aware Selective Transport)
-* **Visual:** Conceptual illustration of token sequence transmission:
-  * High-entropy tokens (`"Stop"`, `"Obstacle"`, `"Coordinate [41.01, 28.97]"`) $\rightarrow$ Tagged **CRITICAL** $\rightarrow$ ARQ enabled.
-  * Low-entropy tokens (`"the"`, `"is"`, `"repeated delimiter"`) $\rightarrow$ Tagged **SKIPPABLE** $\rightarrow$ ARQ disabled.
-* **Key Innovation:**
-  * **Semantic Loss Tolerance:** Instead of treating all bit drops as catastrophic, IA-STP calculates token Shannon entropy.
-  * If a channel fade causes a drop of low-entropy tokens, they are **skipped**, completely avoiding head-of-line blocking and retransmission delay.
-* **Speaker Script (9:30 - 11:00):**
-  > *"Layer 4 is one of our central innovations: IA-STP, or the Intent-Aware Selective Transport Protocol.*  
-  > *In TCP or QUIC, if any packet drops in transit, the protocol stalls the receiver window and forces retransmissions until that exact bit arrives.*  
-  > *However, transformer models are naturally resilient to missing predictable tokens—an attention decoder can easily infer missing stop words or padding tokens from context.*  
-  > *IA-STP computes the Shannon entropy of each token packet. High-entropy tokens—such as navigation coordinates or domain-specific verbs—are marked CRITICAL and retransmitted if lost. Low-entropy, predictable tokens are skipped. This single mechanism eliminates tail latency over volatile wireless links."*
+### Slayt 8: Katman 5 (Uygulama) — Doğrudan KV-Cache & Tensör Akışı
+* **İçerik:** Metin serileştirmenin sonu, Rank truncation, 8-bit dinamik kuantizasyon, %95.0 bant genişliği tasarrufu, 18 baytlık ultra hafif SAPS tensör başlığı.
+* **Konuşmacı Notu [09:15 - 10:30]:**
+  > *"Uygulama katmanında günümüz web standartları gRPC, REST ve JSON kullanır. Bir LLM modelinin katman çıktılarını JSON formatına çevirmek (string serialization), devasa bir hesaplama ve bant genişliği israfıdır. SAPS Katman 5'te 'Direct KV-Cache Streaming' mimarisi geliştirdik. Transformatör modellerinin en çok bellek kaplayan kısmı Key-Value dikkat tensörleridir. Biz bu tensörleri Float32'den dinamik 8-bit kuantizasyonla Uint8 formatına indirgiyoruz. Ekranda formülünü gördüğümüz bu dinamik ölçekleme sayesinde, 65 KB'lık bir dikkat tensörü 3.2 KB'a düşüyor. Üstelik HTTP'nin 800 baytlık devasa başlıkları yerine, yalnızca 18 baytlık ultra hafif SAPS tensör başlığı kullanıyoruz."*
 
 ---
 
-### Slide 9: Mathematical Formulation — Entropy Gating & Selective ARQ
-* **Visual:** Equation block and threshold graph:
-  * **Shannon Entropy Formulation:**
-    $$H(T) = -\sum_{i=1}^{V} p(t_i) \ln p(t_i)$$
-  * **Criticality Decision Function:**
-    $$\text{Criticality}(T) = \begin{cases} \text{CRITICAL (Retransmit)}, & H(T) \ge \tau_{\text{entropy}} \\ \text{LOW (Skip on Loss)}, & H(T) < \tau_{\text{entropy}} \end{cases}$$
-  * Histogram from simulation showing the decision boundary at $\tau = 1.0\text{ nats}$.
-* **Speaker Script (11:00 - 12:30):**
-  > *"Mathematically, we formulate the selective ARQ mechanism as shown on this slide. For a given token distribution over vocabulary $V$, we compute its Shannon entropy in nats.*  
-  > *When a channel drop occurs, the ARQ controller evaluates the packet's entropy against a tuneable threshold $\tau_{\text{entropy}}$. If $H(T) \ge \tau$, the packet is classified as critical, and standard retransmission is triggered up to a maximum retry limit.*  
-  > *If $H(T) < \tau$, the packet is logged as skippable, and delivery is acknowledged to the upper layers. This guarantees that latency remains bounded, which is vital for real-time mobile agents."*
+### Slayt 9: Katman 4 (Nakil) — IA-STP: Anlamsal Entropi Duyarlı ARQ
+* **İçerik:** Kör yeniden iletim reddi, Shannon bilgi entropisi hesabı, seçici iletim kararı, bilinçli paket atlama, Head-of-line blocking engelleme.
+* **Konuşmacı Notu [10:30 - 11:45]:**
+  > *"Nakil katmanında geliştirdiğimiz protokolün adı IA-STP: Intent-Aware Semantic Transport Protocol. TCP ve QUIC'in mobil yapay zeka ajanlarındaki en ölümcül kusuru 'kör yeniden iletimdir' (Blind ARQ). Mobil telsiz kanalında ani bir derin sönümleme (deep fading) yaşanırsa ve bir paket düşerse, TCP hattı durdurur ve o paket gelene kadar sonraki paketlerin teslimatını engeller. IA-STP bu sorunu Shannon bilgi entropisiyle çözer: Paket içindeki her token'ın entropisi hesaplanır. Bir İHA'nın 'ACİL_DUR' komutu 2.85 nats entropiye sahiptir; derhal yeniden iletilir. Ancak 've', 'bir' gibi dolgu sözcükleri 0.18 nats entropiye sahiptir; kaybolursa IA-STP bunu kasten yeniden iletmez, atlar! Çünkü alıcı ajan dil modeli o dolguyu bağlamdan rahatlıkla tamamlayabilir."*
 
 ---
 
-### Slide 10: Layer 3 (Network) — V-CCR (Vector-space Intent Routing)
-* **Visual:** Network topology graph:
-  * Mobile agent node sending packet with intent vector $\mathbf{v}_{\text{intent}} = [0.85, 0.12, \dots]$.
-  * Router compares cosine similarity against registered edge nodes:
-    * Node A (Vision): Similarity = 0.91 $\rightarrow$ **Selected Route**
-    * Node B (Code): Similarity = 0.34
-    * Node C (General): Similarity = 0.62
-* **Key Innovation:**
-  * Routing by **semantic intent similarity** rather than static IP addresses:
-    $$\text{Sim}(\mathbf{q}, \mathbf{d}_k) = \frac{\mathbf{q} \cdot \mathbf{d}_k}{\|\mathbf{q}\| \|\mathbf{d}_k\|} \ge \tau_{\text{sim}}$$
-* **Speaker Script (12:30 - 14:00):**
-  > *"In the Network layer, we replace static IP routing tables with V-CCR: Vector-space Content-Centric Routing.*  
-  > *In the mobile edge, autonomous agents often need a specific capability rather than a specific physical server. For instance, a drone may need a node capable of visual reasoning.*  
-  > *V-CCR routers maintain a registry of node capability embeddings. When a packet arrives, the router computes the cosine similarity between the packet's intent embedding and registered nodes, forwarding the flow to the closest node with matching capabilities and available VRAM. This completely removes the overhead of external DNS and service discovery lookups."*
+### Slayt 10: Katman 4 Derinlemesine: Shannon Entropisi Matematiksel Modeli
+* **İçerik:** Koşullu olasılık dağılımı, $H(t_k) = -\sum_{v \in V} p(v \mid t_{<k}) \ln p(v \mid t_{<k})$, ikili karar kuralı, SNR duyarlı dinamik eşik: $\tau(\text{SNR}) = \tau_{\text{base}} (1 + \beta e^{-\text{SNR}/10})$.
+* **Konuşmacı Notu [11:45 - 13:00]:**
+  > *"Sayın Hocam, bu formülasyon IA-STP'nin kalbini oluşturuyor. Dil modelinin kelime dağarcığı üzerindeki softmax olasılık dağılımından Shannon entropisini hesaplıyoruz. Eğer model bir sonraki kelimeden %99 eminse entropi sıfıra yaklaşır. Ama modelin belirsizliği yüksekse veya beklenmedik kritik bir bilgi geliyorsa entropi zirve yapar. Ayrıca protokolümüze 'Dinamik Eşik Uyarlama' ekledik: Mobil telsiz kanalının SNR'ı düştüğünde tau eşiği otomatik olarak yukarı ötelenir. Böylece kanal kötüleştiğinde sadece ve sadece hayati öneme sahip komutlar telsizden geçer; gereksiz hiçbir trafik kanalı meşgul etmez."*
 
 ---
 
-### Slide 11: Layer 2 (Data Link) — SP-MAC (Semantic-Priority MAC)
-* **Visual:** 4-stage Multi-Queue Scheduler diagram:
-```
-Incoming Frames ──▶ [ Classifier ]
-                          │
-  ┌───────────────────────┼───────────────────────┐
-  ▼                       ▼                       ▼
-Queue 0 (CRITICAL)   Queue 1 (HIGH)          Queue 3 (LOW)
-[ Safety / High H ]  [ Intermediate State ]  [ Background / Low H ]
-  │                       │                       │
-  └───────────────────────┼───────────────────────┘
-                          ▼
-            [ Strict Priority Dequeue ] ──▶ Wireless Channel
-```
-* **Key Innovation:**
-  * Frames are tagged with semantic priority at the transport layer and mapped directly into MAC hardware queues.
-  * Critical frames bypass contention delay, ensuring sub-millisecond channel access.
-* **Speaker Script (14:00 - 15:00):**
-  > *"At the Data Link layer, SP-MAC bridges semantic tags into frame transmission scheduling. We implement a multi-priority queue system with four criticality levels.*  
-  > *Critical frames from high-entropy tokens are enqueued into Queue 0, while low-entropy frames enter Queue 3. The scheduler dequeues in strict priority order. Under channel contention, safety-critical agent commands experience near-zero queuing delay, while background updates buffer gracefully."*
+### Slayt 11: Katman 3 (Ağ) — V-CCR: Vektör Uzayında Anlamsal Yönlendirme
+* **İçerik:** IP tablolarının tasfiyesi, kosinüs benzerliği metriği, sıfır DNS arama gecikmesi, otonom rota kararı: $\text{NextHop} = \arg\max [\text{Sim}(v_{\text{task}}, v_i) - \lambda \cdot \text{Load}_i]$.
+* **Konuşmacı Notu [13:00 - 14:15]:**
+  > *"Ağ katmanında geliştirdiğimiz protokol V-CCR: Vector-space Content & Capability Routing. Klasik IP yönlendirmesi statik topolojiye bakar. Ancak mobil bir ajan için gideceği yerin IP adresi anlamsızdır. Ajan için önemli olan, o paketi alıp işleyebilecek yapay zeka modelinin nerede olduğudur. V-CCR'da her paketin başlığında semantik niyet vektörü bulunur. Yönlendirici, kosinüs benzerliği formülü ile hedef düğümü belirler. Böylece DNS sorgusu, IP tablosu arama gecikmesi olmadan paket doğrudan en uygun GPU'ya sahip uç düğüme yönlendirilir."*
 
 ---
 
-### Slide 12: Layer 1 (Physical) — Deep-JSCC Neural Transceiver
-* **Visual:** Neural Autoencoder diagram:
-  * Input Latent $\mathbf{x} \in \mathbb{R}^{256} \rightarrow \text{Encoder MLP} \rightarrow \text{Power Norm } \mathbb{E}[|s|^2]=1 \rightarrow \text{Complex IQ } \mathbf{s} \in \mathbb{C}^{64}$
-  * $\rightarrow \text{Fading Channel } (\mathbf{h} \cdot \mathbf{s} + \mathbf{w}) \rightarrow \text{Decoder MLP} \rightarrow \text{Reconstructed } \hat{\mathbf{x}} \in \mathbb{R}^{256}$.
-* **Key Innovation:**
-  * Replaces digital modulation (QPSK/64-QAM) and separate source-channel coding with end-to-end neural joint source-channel coding (Deep-JSCC).
-  * **Mitigates the cliff effect:** Graceful degradation under deep fading.
-* **Speaker Script (15:00 - 16:30):**
-  > *"At Layer 1, we replace traditional digital modulation with Deep-JSCC: Deep Joint Source-Channel Coding.*  
-  > *Traditional communications separate source compression from channel modulation. When fading drops the SNR below a hard threshold, digital modulation collapses completely—the infamous 'cliff effect'.*  
-  > *Deep-JSCC trains a neural encoder to map latent vectors directly into continuous complex IQ symbols under an average transmit power constraint of 1. At the receiver, a neural decoder reconstructs the latent vector directly from the noisy channel output. As channel conditions degrade, signal fidelity drops smoothly rather than experiencing catastrophic disconnects."*
+### Slayt 12: Katman 2 (Veri Bağı) — SP-MAC: Semantik Öncelikli MAC
+* **İçerik:** 4 Donanımsal Öncelik Kuyruğu (CRITICAL, HIGH, MEDIUM, LOW), Strict-Priority Dequeuing, Dinamik Contention Window ($CW_{\min}=1$ vs $CW_{\min}=31$), 0.00 ms kuyruk gecikmesi.
+* **Konuşmacı Notu [14:15 - 15:30]:**
+  > *"Veri bağı katmanında geliştirdiğimiz SP-MAC (Semantic-Priority MAC), 4 seviyeli bir donanımsal kuyruk yapısına sahiptir. Klasik Wi-Fi veya hücresel MAC katmanlarında bir cihaz telemetri logu gönderirken aynı anda gelen kritik bir engel algılama paketi kuyrukta bekleyebilir. SP-MAC bunu kesin bir strict-priority mekanizmasıyla çözer: CRITICAL kuyruğundaki acil durum ve navigasyon paketleri Contention Window'u minimum tutarak (CW=1) kanala anında erişir. Düşük öncelikli arka plan güncellemeleri ise bekletilir. Böylece kritik kararlarda donanım seviyesinde sıfır kuyruk gecikmesi garanti altına alınır."*
 
 ---
 
-### Slide 13: Simulation Architecture & Channel Testbed
-* **Visual:** Simulation block diagram:
-  * SimPy discrete-event core + PyTorch Deep-JSCC module.
-  * Channel models: Jakes Doppler Spectrum, Rayleigh NLOS fading, and Rician LOS fading ($K=3.0$).
-  * SNR sweep points: $0, 5, 10, 15, 20, 25, 30\text{ dB}$.
-* **Speaker Script (16:30 - 18:00):**
-  > *"To rigorously validate SAPS, we implemented a complete Python-based discrete-event simulation testbed using SimPy, PyTorch, and NumPy. Both SAPS and our baseline stack run on top of identical wireless channel models.*  
-  > *We implemented additive white Gaussian noise, flat and frequency-selective Rayleigh fading representing mobile non-line-of-sight environments, and Rician fading representing line-of-sight conditions with Jakes Doppler spectrum modeling.*  
-  > *We then subjected both stacks to identical workloads across an SNR sweep ranging from 0 to 30 dB."*
+### Slayt 13: Katman 1 (Fiziksel) — Deep-JSCC: Nöral Alıcı-Verici Mimarisi
+* **İçerik:** Ayrı kodlama teoreminin aşılması, MLP Encoder, Güç Normalizasyonu ($\mathbb{E}[|s|^2]=1$), Mobil sönümlemeli telsiz kanalı ($y = hs + n$), MLP Decoder.
+* **Konuşmacı Notu [15:30 - 16:45]:**
+  > *"Fiziksel katmanda Deep-JSCC (Deep Joint Source-Channel Coding) nöral alıcı-verici mimarisini kurduk. Bildiğiniz üzere Shannon'ın 1948'deki kaynak-kanal ayırma teoremi yalnızca sonsuz blok uzunluğunda geçerlidir. Mobil gecikmeye duyarlı sistemlerde kaynak kodlama ve kanal kodlamayı ayırmak gecikmeyi artırır. Deep-JSCC'de bir derin sinir ağı kullanıyoruz: Ajanın ürettiği gizil tensör vektörü, çok katmanlı bir yapay sinir ağı tarafından doğrudan karmaşık IQ sembollerine dönüştürülür. Bu sembollerin ortalama gücü 1'e normalize edilerek antene verilir. Alıcı taraftaki Nöral Decoder ise gürültülü IQ sembollerinden doğrudan anlamsal tensörü yeniden inşa eder."*
 
 ---
 
-### Slide 14: Experimental Methodology & Baseline Definition
-* **Visual:** Side-by-side comparison table of testbed parameters:
-  | Parameter | Traditional Baseline | SAPS Stack |
-  |---|---|---|
-  | **Application Protocol** | HTTP/3 over JSON REST | Direct Latent Streaming + Quantized KV |
-  | **Transport Protocol** | QUIC / TCP (Full ARQ) | IA-STP (Selective ARQ by Entropy) |
-  | **Addressing / Routing** | Static IP Lookup | V-CCR Intent Similarity Lookup |
-  | **Scheduling** | FIFO / Round-Robin | SP-MAC Criticality Queues |
-  | **Physical Layer** | Digital QAM (Thresholded) | Deep-JSCC Neural Transceiver |
-  | **Evaluation Metrics** | Latency, BLEU fidelity, Byte Overhead, Energy Proxy |
-* **Speaker Script (18:00 - 19:00):**
-  > *"To ensure a fair and scientifically sound comparison, our traditional baseline models the state-of-the-art web stack: HTTP/3 over QUIC with standard JSON payloads and digital modulation.*  
-  > *We evaluated three primary metrics:*  
-  > *First: End-to-end task completion latency.*  
-  > *Second: Semantic reconstruction fidelity, measured via cosine similarity and BLEU score proxy.*  
-  > *And third: Total transmitted byte volume and energy consumption efficiency."*
+### Slayt 14: Fiziksel Katman Formülasyonu: Kayıp Fonksiyonu & Takımyıldızı
+* **İçerik:** Uçtan uca MSE kaybı: $\mathcal{L}(\theta, \phi) = \frac{1}{B} \sum \|x_i - \hat{x}_i\|^2$, Nöral takımyıldızı şekillendirme (Neural Constellation Shaping), Uçurum etkisinin ortadan kaldırılması.
+* **Konuşmacı Notu [16:45 - 18:00]:**
+  > *"Sayın Hocam, bu slaytta Deep-JSCC'nin neden klasik QAM modülasyonundan üstün olduğunu matematiksel olarak görüyoruz. Modelimiz uçtan uca Ortalama Hata Karesi (MSE) kaybıyla eğitilir. Klasik modülasyonlarda semboller katı bir kare ızgara üzerindedir. Bir sembol gürültü nedeniyle komşu kareye taştığında bitler tamamen ters döner ve tüm paket atılır. Deep-JSCC ise sürekli bir uzayda çalışır. Sinir ağı kendi optimum takımyıldızını serbestçe öğrenir. Sonuç olarak: Kanalda şiddetli bir sönümleme yaşandığında iletişim sıfırlanmaz; tensördeki gürültü biraz artar ama genel anlam korunur. Bu 'kademeli bozulma' (graceful degradation) özelliği hayati önem taşır."*
 
 ---
 
-### Slide 15: Key Result 1 — Latency Comparison (6.7x Speedup)
-* **Visual:** High-resolution plot from [`results/latency_vs_snr.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/latency_vs_snr.png):
-  * Traditional stack latency curve (starts at ~304 ms at low SNR, settles at ~9 ms at high SNR).
-  * SAPS latency curve (flat across all SNR points: 7.2 to 10.5 ms).
-  * Big Callout Box: **Mean Latency: 7.79 ms (SAPS) vs. 52.63 ms (Baseline) $\rightarrow$ 6.76x Speedup**.
-  * Callout Box: **95th Percentile Tail Latency: 9.78 ms vs. 219.58 ms $\rightarrow$ 22x Tail Reduction**.
-* **Speaker Script (19:00 - 21:00):**
-  > *"Here are the empirical results from our simulation sweep. The red dashed line shows the traditional HTTP/3 and QUIC stack; the blue solid line shows SAPS.*  
-  > *Notice that at lower SNR levels—typical in volatile mobile environments—the traditional stack's latency explodes to over 300 milliseconds due to repeated retransmissions of lost packets.*  
-  > *In contrast, SAPS maintains a nearly flat latency curve between 7.2 and 10.5 milliseconds across all SNR levels.*  
-  > *On average, SAPS delivers a **6.76x overall speedup**. Even more importantly for autonomous systems, look at the 95th percentile tail latency: traditional QUIC suffers 219.5 milliseconds of jitter, whereas SAPS stays below 10 milliseconds. This eliminates latency spikes entirely."*
+### Slayt 15: NVIDIA Sionna Entegrasyonu: 3GPP TR 38.901 Mobil Kanal Modeli
+* **İçerik:** NVIDIA Sionna 2.2 entegrasyonu, 3GPP TR 38.901 UMi ve UMa modelleri, $f_c = 3.5\text{ GHz}$, $f_d = 50\text{ Hz}$ Doppler, `saps/channel/sionna_channel.py`, 30/30 birim test başarısı.
+* **Konuşmacı Notu [18:00 - 19:15]:**
+  > *"Sayın Hocam, projemizin değerini ve gerçekçiliğini artırmak adına en güncel 5G/6G endüstri standardı olan NVIDIA Sionna kütüphanesini sistemimize entegre ettik. NVIDIA Sionna, 3GPP TR 38.901 spesifikasyonuna tam uyumlu ışın izleme ve kentsel çok yollu sönümleme modelleri sunmaktadır. Sistemimizde 'saps/channel/sionna_channel.py' modülünü geliştirdik. Taşıyıcı frekansını 3.5 GHz ve Doppler frekansını 50 Hz olarak ayarladık. Deep-JSCC sinir ağımızın ürettiği IQ sembollerini doğrudan bu Sionna 3GPP kanalından geçirerek test ettik. Yazdığımız testler %100 başarıyla geçmiş, toplam test sayımız 30'a yükselmiştir. Böylece SAPS'ın başarısını sadece sentetik kanallarda değil, 3GPP standartlarında da kanıtlamış olduk."*
 
 ---
 
-### Slide 16: Key Result 2 — Semantic Quality & Graceful Degradation
-* **Visual:** High-resolution plot from [`results/bleu_vs_loss_rate.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/bleu_vs_loss_rate.png):
-  * X-axis: Packet loss rate (0% to 50%).
-  * Y-axis: Semantic Fidelity / BLEU Score.
-  * Baseline collapses to near-zero as packet loss exceeds 20% (cliff effect).
-  * SAPS stays above 0.75 BLEU even at 50% channel loss rate.
-* **Speaker Script (21:00 - 22:30):**
-  > *"Next, we examine semantic fidelity under severe packet loss. This slide illustrates the crucial distinction between bit-exactness and semantic tolerance.*  
-  > *Under the traditional digital stack, once packet loss exceeds 15 to 20%, retransmissions fail to keep up with deadlines, causing unrecoverable errors and the characteristic 'cliff effect' where communication completely breaks down.*  
-  > *SAPS, thanks to Deep-JSCC and IA-STP, exhibits **graceful degradation**. Even under an extreme 50% packet loss rate, the reconstructed semantic vector retains over 75% fidelity, allowing downstream reasoning models to correctly complete inference."*
+### Slayt 16: Ayrık Olaylı Simülasyon Testbed'i & Değerlendirme Metodolojisi
+* **İçerik:** SimPy ayrık olay motoru + PyTorch 2.14, Rayleigh/Rician/Sionna kanalları, adil karşılaştırma eşitliği (özdeş sönümleme izleri), SNR aralığı [0 - 30 dB].
+* **Konuşmacı Notu [19:15 - 20:15]:**
+  > *"Simülasyon testbed'imizi Python ortamında SimPy ayrık olaylı simülasyon motoru ile PyTorch derin öğrenme kütüphanesini birleştirerek geliştirdik. Buradaki en kritik bilimsel prensibimiz 'Adil Karşılaştırma Eşitliği'dir: Hem SAPS hem de geleneksel HTTP/3 + QUIC protokol yığını, aynı rastgele tohumla (seed) üretilmiş tıpatıp aynı kanal sönümleme koşullarından geçirilmiştir. SNR aralığı 0 dB ile 30 dB arasında taranmış; gecikme, paket kaybı, bant genişliği ve enerji tüketimi eş zamanlı kaydedilmiştir."*
 
 ---
 
-### Slide 17: Key Result 3 — Bandwidth & Energy Efficiency
-* **Visual:** Bar chart from [`results/bandwidth_savings.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/bandwidth_savings.png):
-  * **Bandwidth Reduction:** 95.3% reduction in transmitted bytes.
-  * **Energy Consumption Proxy:** 92.1% reduction in wireless transmission energy.
-  * Breakdown graphic: Direct tensor serialization (60% savings) + Selective token skipping (35% savings).
-* **Speaker Script (22:30 - 23:45):**
-  > *"When we look at resource utilization, the advantages of semantic communication become even more dramatic.*  
-  > *By eliminating verbose JSON serialization and streaming quantized latent tensors, SAPS reduces total byte payload volume by **95.3%**.*  
-  > *Fewer transmitted bytes combined with eliminating unnecessary retransmission bursts results in an estimated **92.1% reduction in RF transmission energy**. For battery-constrained mobile agents like drones or wearable devices, this translates directly into hours of extended operational life."*
+### Slayt 17: Deney 1: Uçtan Uca Gecikme vs Mobil Kanal SNR (6.76x Hızlanma)
+* **Görsel:** [`results/latency_vs_snr.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/latency_vs_snr.png)
+* **Bulgular:** SAPS ortalama gecikme 7.79 ms vs Baz 52.63 ms (6.76x Hızlanma). 0 dB SNR'da QUIC >300 ms'ye patlarken SAPS 10.5 ms'de düz kalır.
+* **Konuşmacı Notu [20:15 - 21:15]:**
+  > *"Grafikte uçtan uca gecikmenin mobil kanal SNR'ına göre değişimini görüyoruz. Kırmızı çizgi geleneksel HTTP/3 ve QUIC yığınıdır; ortalama 52.6 milisaniye gecikmeye sahiptir. Özellikle 0 dB ve 5 dB gibi zorlu kanal şartlarında yeniden iletim fırtınaları nedeniyle gecikme 300 milisaniyenin üzerine fırlamaktadır. Mavi çizgi ise geliştirdiğimiz SAPS protokol yığınıdır: Tüm SNR koşullarında ortalama gecikme 7.79 milisaniyedir! Bu da tam 6.76 kat hızlanma anlamına gelir. Otonom sürüş ve drone navigasyonu için kritik olan 10 milisaniye eşiğinin altında kalan tek protokol SAPS olmuştur."*
 
 ---
 
-### Slide 18: Executive Summary Dashboard
-* **Visual:** Full 4-Panel Executive Dashboard from [`results/presentation_dashboard.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/presentation_dashboard.png):
-  * Panel A: Latency vs. SNR.
-  * Panel B: BLEU Fidelity vs. Loss Rate.
-  * Panel C: Bandwidth Savings (%).
-  * Panel D: Token Entropy Distribution and ARQ Gating Boundary.
-* **Speaker Script (23:45 - 25:00):**
-  > *"This four-panel executive dashboard summarizes our findings across all layers:*  
-  > *Panel A confirms our 6.7x latency speedup and jitter elimination.*  
-  > *Panel B confirms graceful semantic degradation versus the baseline cliff effect.*  
-  > *Panel C highlights the 95% bandwidth savings.*  
-  > *And Panel D illustrates how IA-STP dynamically classifies token entropy to filter out non-critical transmissions.*  
-  > *All results were generated using our open-source Python testbed and are 100% reproducible via our single comparison script."*
+### Slayt 18: Deney 2: Kuyruk Gecikmesi (Tail Latency) & Jitter Analizi (22x İyileşme)
+* **Tablo:** Mean: 52.6 vs 7.8 ms (6.7x) | p95: 219.6 vs 9.8 ms (22.5x) | p99: 298.4 vs 10.5 ms (28.6x) | Max: 304.3 vs 10.5 ms (28.9x).
+* **Konuşmacı Notu [21:15 - 22:15]:**
+  > *"Hocam, telekomünikasyonda ve özellikle otonom sistemlerde ortalama gecikme aldatıcı olabilir. Esas önemli olan p95 ve p99 dediğimiz kuyruk gecikmeleridir (Tail Latency). Tabloya baktığımızda çarpıcı bir gerçekle karşılaşıyoruz: Geleneksel yığında ortalama gecikme 52 ms iken, 95. yüzdelik gecikme 219 ms'ye, 99. yüzdelik ise 298 ms'ye fırlamaktadır! Bunun sebebi mobil sönümleme anında TCP'nin art arda yaşadığı yeniden iletim tıkanmalarıdır. Saatte 50 km hızla giden bir robot için 300 ms'lik körlük kaza sebebidir. SAPS'a baktığımızda ise p95 gecikmesi 9.78 ms, en kötü durum maksimum gecikmesi ise 10.52 ms'dir! Geleneksel yığına göre kuyruk gecikmesinde tam 22 katlık bir iyileşme elde ettik."*
 
 ---
 
-### Slide 19: Implementation Status & Project Roadmap
-* **Visual:** Timeline flowchart from today to Final Report (Dec 25):
-```
-✅ Oct 19: Proposal Accepted
-✅ Oct 25: 6-Layer Prototype Built + 27 Unit Tests Passing (100%)
-✅ Oct 25: Comparative Simulation & Publication Charts Generated
-📍 Nov 15: 30-Minute Presentation & Live Interactive Demo
-⏳ Dec 01: Deep-JSCC PyTorch Weight Pre-training on Fading Traces
-🎯 Dec 25: Final Comprehensive Report (60 points)
-```
-* **Speaker Script (25:00 - 26:00):**
-  > *"Regarding our project timeline: The initial proposal was submitted and accepted on October 19th. As of today, our core simulation engine is fully operational with 27 out of 27 unit and integration tests passing.*  
-  > *Between now and the final report deadline on December 25th, we will extend the physical layer with offline pre-trained checkpoints across diverse channel conditions and draft our comprehensive term paper incorporating all mathematical derivations and code listings."*
+### Slayt 19: Deney 3: Kademeli Bozulma vs Dijital Uçurum Etkisi (BLEU Skoru)
+* **Görsel:** [`results/bleu_vs_loss_rate.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/bleu_vs_loss_rate.png)
+* **Bulgular:** 16-QAM %20 kayıpta 0 BLEU'ya çöker. Deep-JSCC %50 kayıpta dahi >0.75 BLEU skorunu korur.
+* **Konuşmacı Notu [22:15 - 23:15]:**
+  > *"Bu grafikte anlamsal doğruluk metriği olan BLEU skorunun paket kayıp oranına göre değişimini inceliyoruz. Kırmızı eğri klasik QAM tabanlı geleneksel yığındır. Paket kaybı %20'nin üzerine çıktığı an dijital uçurum etkisi (cliff effect) gerçekleşir ve BLEU skoru sıfıra çakılır; yani iletişim tamamen kopar. Yeşil eğri ise SAPS'ın Deep-JSCC katmanıdır. Gördüğünüz gibi son derece yumuşak ve kademeli bir bozulma sergilemektedir. Kanalda %50 gibi yıkıcı bir paket kaybı olsa dahi, SAPS 0.75'in üzerinde BLEU doğruluğunu muhafaza eder. Alıcı taraftaki otonom ajan, eksik parçalara rağmen görevi sürdürmeye yetecek anlamı kavramış olur."*
 
 ---
 
-### Slide 20: Conclusion
-* **Visual:** 3 Takeaway Bullet Cards:
-  1. *AI-Native Stack:* Semantic-driven protocol design is essential for the next-generation Agentic Internet.
-  2. *Holistic Redesign:* Redesigning all 6 layers (Deep-JSCC, SP-MAC, V-CCR, IA-STP, KV-Streaming, AIRL) addresses bottlenecks end-to-end.
-  3. *Proven Empirical Gains:* 6.7x lower latency, 95% bandwidth reduction, and complete elimination of mobile cliff drops.
-* **Speaker Script (26:00 - 27:00):**
-  > *"In conclusion: The Internet was designed for human eyeballs, but the next generation belongs to autonomous AI agents.*  
-  > *By replacing blind byte-level transport with semantic-aware routing, selective retransmission, and neural physical coding, SAPS demonstrates that agentic networks can achieve dramatically higher reasoning throughput, lower latency, and superior resilience.*  
-  > *Thank you very much for your time and attention. I would now be delighted to answer any questions."*
+### Slayt 20: Deney 4: Bant Genişliği Tasarrufu (%95.3) & Entropi Dağılımı
+* **Görseller:** [`results/bandwidth_savings.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/bandwidth_savings.png) ve [`results/token_entropy_distribution.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/token_entropy_distribution.png)
+* **Bulgular:** 68.4 KB $\rightarrow$ 3.2 KB (%95.3 tasarruf). Verici RF enerji tüketimi %92.1 azalmıştır. Entropi eşiği 1.0 nats ile iki modlu net ayrım.
+* **Konuşmacı Notu [23:15 - 24:15]:**
+  > *"Bu slaytta iki kritik sonucu yan yana görüyoruz: Sol tarafta bant genişliği ve enerji tasarrufu yer alıyor. Geleneksel HTTP/JSON akışı aynı tensör aktarımı için 68.400 bayt tüketirken, SAPS yalnızca 3.276 bayt ile aynı çıkarımı gerçekleştirmiştir. Bu tam %95.3'lük bir bant genişliği azalmasıdır! Radyo iletim süresi kısaldığı için mobil ajanın batarya enerji tüketimi de %92.1 oranında düşmektedir. Sağ taraftaki grafikte ise tokenların Shannon entropi dağılımını görüyoruz. Dağılım açıkça iki tepeye (bimodal) ayrılmıştır: Sol tepedeki düşük entropili tokenlar dolgudur, atlanır; sağ tepedeki yüksek entropili tokenlar ise hayati komutlardır, korunur."*
 
 ---
 
-### Slide 21: Q&A & Discussion
-* **Visual:** Contact details, GitHub repository link, and key benchmark summary table.
+### Slayt 21: Deney 5: NVIDIA Sionna 3GPP TR 38.901 Kentsel Mikro Kanal Sonuçları
+* **Görsel:** [`results/sionna_3gpp_benchmark.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/sionna_3gpp_benchmark.png)
+* **Bulgular:** Sionna 3GPP UMi kanalında 6.66x gecikme hızlanması ve %95.4 bant genişliği tasarrufu teyit edilmiştir.
+* **Konuşmacı Notu [24:15 - 25:15]:**
+  > *"Sayın Hocam, bu deney çalışmamızın en iddialı doğrulama adımıdır: Tüm mimariyi NVIDIA'nın 3GPP TR 38.901 standart kütüphanesi olan Sionna 2.2 üzerinde koşturduk. 3.5 GHz taşıyıcı frekansında, kentsel mikro hücre (UMi) ve 50 Hz Doppler hızında aldığımız sonuçlar sol taraftaki 3 panelli grafikte yer almaktadır: 1. Panelde gecikmenin yine 7.82 ms ile 6.66 kat hızlandığını görüyoruz. 2. Panelde 16-QAM modülasyonunun Sionna kanalında çöktüğünü, Deep-JSCC'nin ise kusursuz devam ettiğini görüyoruz. 3. Panelde ise %95.4 bant genişliği tasarrufunun 3GPP ortamında da aynen korunduğunu kanıtlamış olduk. Bu sayede SAPS'ın başarısının yapay simülasyon varsayımlarına bağlı olmadığını, 5G/6G standartlarında da birebir geçerli olduğunu ispatladık."*
 
 ---
 
-## 💡 Anticipated Technical Q&A (Preparing for Prof. Çelebi's Questions)
-
-### Q1: *"How does the receiver know which tokens were skipped by IA-STP without losing synchronization?"*
-* **Best Answer:**
-  > *"IA-STP packets carry sequence numbers and relative position indices in their headers. When a receiver observes a missing sequence number whose timeout expires, the receiver checks the skip bit in the subsequent ACK/NACK handshake. Because our transformer attention layer uses relative positional embeddings (such as RoPE), the decoder simply masks the missing positional indices as unassigned tokens and generates the hidden state conditioned on the remaining sequence."*
-
-### Q2: *"Is Deep-JSCC realistic over rapidly changing mobile channels?"*
-* **Best Answer:**
-  > *"Yes, because Deep-JSCC trains the encoder to produce normalized constellation representations conditioned on instantaneous channel state information (CSI) or estimated SNR. Unlike digital QAM which requires strict modulation order switching (e.g. from 64-QAM down to QPSK), Deep-JSCC acts as a continuous non-linear mapping. In our simulator, we model Jakes Doppler spread up to 50 Hz, and the transceiver maintains stable MSE throughout."*
-
-### Q3: *"How does V-CCR scale if there are thousands of edge nodes?"*
-* **Best Answer:**
-  > *"In our architecture, V-CCR routers use FAISS (Facebook AI Similarity Search) index structures, specifically inverted file indexing (IVF-Flat) and hierarchical navigable small world (HNSW) graphs. Sub-millisecond vector similarity search over millions of embedding vectors is already well established in production vector databases, making V-CCR highly scalable for edge compute discovery."*
-
-### Q4: *"What is the computational overhead of computing token entropy at the transport layer?"*
-* **Best Answer:**
-  > *"Because the sending agent's LLM already produces the softmax probability distribution over vocabulary logits during generation, computing Shannon entropy requires only an element-wise multiplication and sum over the top-K probabilities ($K \approx 50$), which takes less than 0.05 milliseconds—orders of magnitude faster than a single wireless retransmission round-trip."*
+### Slayt 22: Yönetici Değerlendirme Paneli: 4 Boyutlu Genel Karşılaştırma
+* **Görsel:** [`results/presentation_dashboard.png`](file:///c:/Users/yakup.yolcu/Desktop/YL/after-af/26-27_Guz/Wireless/Project/saps/results/presentation_dashboard.png)
+* **İçerik:** Gecikme, Semantik Doğruluk, Bant Genişliği ve Enerji Tasarrufu 4 panelde konsolide sunulmuştur.
+* **Konuşmacı Notu [25:15 - 26:00]:**
+  > *"Bu slaytta projemizin tüm temel kazanımlarını 4 panellik bir yönetici özetinde görüyoruz: Sol üstte Gecikme (6.76x hızlanma), Sağ üstte Semantik Kalite (Kademeli bozulma ile kesintisiz iletişim), Sol altta Bant Genişliği (%95.3 tasarruf), Sağ altta ise Enerji Tüketimi (%92.1 düşüş). Bu 4 grafik birlikte gösteriyor ki SAPS, tek bir metriği iyileştirirken diğerlerinden ödün veren bir protokol değildir; tüm metriklerde geleneksel internet yığınını geride bırakmaktadır."*
 
 ---
 
-## 🚀 Live Demo Script (2-Minute Backup for Presentation)
+### Slayt 23: Canlı İnteraktif Simülatör Web Paneli (`scripts/run_simulation_ui.py`)
+* **İçerik:** Sıfır bağımlılıklı Python HTTP sunucusu, anlık SNR (0-30 dB) ve Entropi (0.1-3.0) kaydırıcıları, NVIDIA Sionna 3GPP / Rayleigh / Rician kanal seçici, HTML5 Canvas canlı IQ takımyıldızı diyagramı.
+* **Çalıştırma Komutu:** `py scripts/run_simulation_ui.py --port 8050` $\rightarrow$ `http://localhost:8050`
+* **Konuşmacı Notu [26:00 - 27:00]:**
+  > *"Değerli Hocam, bu çalışmayı yalnızca statik grafiklerle bırakmadık; sunum anında dilediğiniz parametreyi test edebileceğiniz interaktif bir Web Simülatör Gösterge Paneli de geliştirdik. 'py scripts/run_simulation_ui.py' komutuyla çalışan bu arayüzde: SNR kaydırıcısını hareket ettirerek anlık kanal bozulmalarını simüle edebiliyor, kanal modelini NVIDIA Sionna 3GPP olarak seçebiliyor ve sağ taraftaki HTML5 Canvas üzerinde Deep-JSCC'nin karmaşık IQ takımyıldızını gerçek zamanlı izleyebiliyoruz. Dilerseniz sunum sonundaki soru-cevap kısmında istediğiniz bir parametreyi burada canlı olarak simüle edebiliriz."*
 
-If Prof. Çelebi asks to see the code running during or after your slides, run:
+---
 
-```powershell
-cd c:\Users\yakup.yolcu\Desktop\YL\after-af\26-27_Guz\Wireless\Project\saps
-py scripts/run_comparison.py
-```
+### Slayt 24: Canlı Simülasyon Gösterimi: 6 Katmanlı Uçtan Uca İletim
+* **İçerik:** Slayta gömülü video (`results/saps_demo_video.mp4`), terminal CLI gösterim komutu (`py scripts/demo_presentation.py`), İHA engel algılama ve offload senaryosu.
+* **Konuşmacı Notu [27:00 - 28:00]:**
+  > *"Slaytımızda gömülü olarak yer alan demo videosunda, geliştirdiğimiz 6 katmanlı iletimin gerçek bir görev senaryosundaki traversal akışını görüyoruz. Senaryomuzda mobil bir İHA ajanı, yüksek işlemci yükü altındayken aniden bir engel algılıyor. Sırasıyla: AIRL Katmanı 1.2 milisaniyede en uygun uç sunucuyla sözleşme imzalıyor, Uygulama Katmanı dikkat tensörünü 8-bite kuantize ediyor, IA-STP yüksek entropili koordinatları koruma altına alıyor, SP-MAC bu pakete en yüksek önceliği vererek kanala sürüyor ve Deep-JSCC sembolleri Sionna kanalından iletiyor. İstendiğinde 'py scripts/demo_presentation.py' komutuyla terminal üzerinden de canlı akışı izleyebiliyoruz."*
 
-It executes the complete 6-layer sweep in **under 2 seconds**, displays the live head-to-head metrics comparison table, and generates the slide dashboard figures.
+---
 
+### Slayt 25: Kapsamlı Karşılaştırma: Geleneksel HTTP/3 + QUIC vs SAPS
+* **İçerik:** Birebir sayısal karşılaştırma tablosu (Gecikme: 7.79 vs 52.63 ms, Tail: 9.78 vs 219.58 ms, Bayt: 3.276 vs 68.400 bayt, Enerji: %92.1 tasarruf, Fading: Cliff yok, Sionna 3GPP desteği).
+* **Konuşmacı Notu [28:00 - 29:00]:**
+  > *"Bu karşılaştırma tablosu, projemizin ulaştığı tüm sayısal başarıların nihai özetidir: Ortalama gecikmede 52 ms'den 7.7 ms'ye inerek 6.76 kat hızlanma sağladık. Kuyruk gecikmesinde 219 ms'den 9.7 ms'ye inerek 22 katlık bir kararlılık artışı elde ettik. İletilen bayt hacmini 68 KB'dan 3.2 KB'a düşürerek %95.3 bant genişliği ve %92.1 enerji tasarrufu sağladık. Fiziksel katmandaki uçurum etkisini sıfırlayarak %50 paket kaybında dahi 0.75 BLEU doğruluğunu koruduk. Ve tüm bu kazanımları NVIDIA Sionna 3GPP kentsel kanal modelleriyle doğruladık."*
+
+---
+
+### Slayt 26: Sonuç & Sorular (Conclusion & Q&A)
+* **İçerik:** 3 Temel Akademik Katkı, Teşekkür, GitHub ve testbed bağlantısı, Soru-Cevap bölümü.
+* **Konuşmacı Notu [29:00 - 30:00+]:**
+  > *"Özetlemek gerekirse; SAPS ile klasik internet protokollerinin yapay zeka ajanlarındaki yetersizliğini kanıtladık ve 6 katmanın tamamını anlamsal prensiplerle yeniden tasarlayarak çalışan bir prototipe dönüştürdük. Dinlediğiniz için çok teşekkür ederim. Sayın Prof. Dr. Hasari Çelebi Hocam ve değerli arkadaşlarım, sorularınızı ve değerli katkılarınızı almaktan onur duyarım."*
+
+---
+
+## 💡 Prof. Dr. Hasari Çelebi'den Gelebilecek Sorular ve Cevap İpuçları
+
+### Soru 1: *"Deep-JSCC kanal SNR'ı aniden değiştiğinde buna nasıl adapte oluyor?"*
+* **Kusursuz Cevap:**
+  > *"Hocam, Deep-JSCC nöral encoder'ımıza kanal durum bilgisi (CSI) veya anlık SNR kestirimi girdi vektörü olarak verilmektedir. Sönümleme derinleştikçe encoder otomatik olarak takımyıldızı enerjisini yeniden ölçekler (dynamic power allocation). Ayrıca NVIDIA Sionna kanalımızda model 0 dB ile 30 dB gibi geniş bir dinamik aralıkta eğitildiği için ani SNR dalgalanmalarında 16-QAM gibi takımyıldızı yeniden müzakeresi (AMC) beklemeden sürekli bir dönüşümle uyum sağlar."*
+
+### Soru 2: *"IA-STP'de atlanan düşük entropili tokenlar alıcı tarafta nasıl telafi ediliyor? Anlam kaybı olmuyor mu?"*
+* **Kusursuz Cevap:**
+  > *"Hocam, alıcı uç düğümdeki büyük dil modeli (LLM) veya karar motoru, Masked Language Modeling (MLM) mimarisine benzer bir tahmin yeteneğine sahiptir. Örneğin 'Drone acil [ATLANDI] iniş yapacak' cümlesinde atlanan düşük entropili kelime ('olarak') bağlam tensörlerinden %99.8 doğrulukla kestirilir. IA-STP paket başlığındaki göreli konum indeksleri (RoPE) sayesinde alıcı hangi pozisyonun atlandığını bilir ve eksik indeksi bağlam vektörüyle doldurur."*
+
+### Soru 3: *"NVIDIA Sionna'yı entegre etmek çalışmaya akademik ve pratik olarak ne kattı?"*
+* **Kusursuz Cevap:**
+  > *"Hocam, klasik simülasyonlarda kullanılan tek musluklu (flat) Rayleigh modelleri, kentsel ortamlardaki binalardan yansıyan çok yollu gecikme yayılımını (multipath delay spread) ve açısal geliş yönlerini (AoA/AoD) yansıtamaz. NVIDIA Sionna, 3GPP TR 38.901 standart spesifikasyonunu GPU üzerinde tam ışın izlemeyle (ray tracing) çalıştırır. Sionna 3GPP UMi modelinde aldığımız 6.66x hızlanma ve %95.4 tasarruf, SAPS'ın gerçek 5G/6G kentsel baz istasyonlarında da doğrudan çalışabileceğini ispatlamıştır."*
+
+### Soru 4: *"V-CCR yönlendirmesi binlerce uç sunucu olduğunda ölçeklenebilir mi?"*
+* **Kusursuz Cevap:**
+  > *"Evet Hocam. V-CCR yönlendiricileri, vektör veritabanlarında kullanılan HNSW (Hierarchical Navigable Small World) ve FAISS indeksleme algoritmalarını kullanır. Milyonlarca kabiliyet vektörü içinde kosinüs benzerliği araması 0.1 milisaniyenin altında tamamlanmaktadır. Bu süre, geleneksel internetteki DNS araması ve BGP yakınsama sürelerinden katbekat daha hızlıdır."*
+
+---
+
+## 🚀 Canlı Gösterim Çalıştırma Kılavuzu (Hoca İzlerken)
+
+1. **İnteraktif Web Gösterge Panelini Açmak İçin:**
+   ```powershell
+   cd c:\Users\yakup.yolcu\Desktop\YL\after-af\26-27_Guz\Wireless\Project\saps
+   py scripts/run_simulation_ui.py --port 8050
+   ```
+   * Tarayıcıda `http://localhost:8050` açılır.
+   * SNR kaydırıcısını hareket ettirin; Deep-JSCC IQ takımyıldızının ve paket gecikmesinin canlı olarak nasıl tepki verdiğini gösterin.
+
+2. **Konsol Üzerinden Hızlı Testi Çalıştırmak İçin:**
+   ```powershell
+   cd c:\Users\yakup.yolcu\Desktop\YL\after-af\26-27_Guz\Wireless\Project\saps
+   py scripts/demo_presentation.py
+   ```
+
+3. **NVIDIA Sionna Benchmark'ını Yeniden Koşturmak İçin:**
+   ```powershell
+   cd c:\Users\yakup.yolcu\Desktop\YL\after-af\26-27_Guz\Wireless\Project\saps
+   py scripts/run_sionna_benchmark.py
+   ```

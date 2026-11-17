@@ -44,3 +44,4 @@ def test_sionna_3gpp_channel():
 
     assert rx.shape == sig.shape
     assert not np.any(np.isnan(rx))
+

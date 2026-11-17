@@ -170,3 +170,4 @@ class Sionna3GPPChannel(ChannelModel):
         noise_std = np.sqrt(1.0 / (2.0 * max(snr_linear, 1e-10)))
         noise = (np.random.randn(*signal.shape) + 1j * np.random.randn(*signal.shape)) * noise_std
         return signal + noise
+
